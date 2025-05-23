@@ -1,269 +1,307 @@
-# 🎵 汽水音乐爬虫 (QiShui Music Downloader)
-
-> 一个简单高效的汽水音乐下载工具，支持自动格式转换
+# 汽水音乐爬虫 🎵
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Selenium](https://img.shields.io/badge/Selenium-4.0+-orange.svg)](https://selenium-python.readthedocs.io/)
+[![MoviePy](https://img.shields.io/badge/MoviePy-1.0+-red.svg)](https://zulko.github.io/moviepy/)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)]()
 
-## 📖 项目简介
+一个用于从汽水音乐下载歌曲并自动转换音频格式的Python爬虫工具。
 
-这是一个用于从汽水音乐平台下载音频的Python工具。通过Selenium模拟浏览器访问，解析页面JavaScript数据，提取音频下载链接并自动转换格式。
+## ✨ 功能特性
 
-### ✨ 主要特性
+- 🔗 支持汽水音乐分享链接解析
+- 🎵 自动提取音频下载链接
+- 📱 智能处理重定向和动态页面
+- 🎧 自动转换MP4到MP3格式
+- 📊 实时下载进度显示
+- 📁 批量转换现有文件
+- 🛡️ 完善的错误处理机制
 
-- 🔍 **自动解析**：智能识别汽水音乐分享链接
-- 🤖 **浏览器模拟**：使用Selenium处理JavaScript渲染页面  
-- 📥 **一键下载**：自动下载高质量音频文件
-- 🔄 **格式转换**：支持MP4自动转换为MP3
-- 📊 **进度显示**：实时显示下载和转换进度
-- 💾 **信息保存**：自动保存音乐元数据到JSON文件
+## 📁 项目结构
+
+```
+qishui-music-crawler/
+├── main.py                    # 程序入口，提供交互式界面
+├── requirements.txt           # 项目依赖清单
+├── README.md                  # 项目说明文档
+├── downloads/                 # 音频下载目录 (自动创建)
+├── debug_page_fixed.html     # 调试文件 (运行时生成)
+└── src/
+    ├── config.py              # 配置管理模块
+    ├── crawler.py             # 爬虫核心功能
+    ├── parser.py              # 页面解析和数据提取
+    └── converter.py           # 音频格式转换
+```
 
 ## 🚀 快速开始
 
 ### 环境要求
 
-```
-Python 3.7+
-Chrome浏览器
-ChromeDriver (自动下载)
-```
+![Python](https://img.shields.io/badge/Python-3.7+-blue?style=flat-square&logo=python&logoColor=white)
+![Chrome](https://img.shields.io/badge/Chrome-Latest-green?style=flat-square&logo=googlechrome&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 
 ### 安装依赖
 
 ```bash
-pip install requests selenium moviepy
+pip install -r requirements.txt
 ```
 
-### 基本使用
+![Install](https://img.shields.io/badge/Install-pip%20install%20-r%20requirements.txt-blue?style=flat-square&logo=pypi&logoColor=white)
 
-```python
+### 依赖说明
+
+项目使用以下核心库：
+
+![Requests](https://img.shields.io/badge/requests-2.25.0+-blue?style=flat-square&logo=python&logoColor=white)
+![Selenium](https://img.shields.io/badge/selenium-4.0.0+-orange?style=flat-square&logo=selenium&logoColor=white)
+![MoviePy](https://img.shields.io/badge/moviepy-1.0.3+-red?style=flat-square&logo=python&logoColor=white)
+![WebDriver Manager](https://img.shields.io/badge/webdriver--manager-3.8.0+-green?style=flat-square&logo=python&logoColor=white)
+
+```
+requests>=2.25.0        # HTTP请求处理
+selenium>=4.0.0         # 动态页面抓取
+moviepy>=1.0.3          # 音频格式转换
+webdriver-manager>=3.8.0 # Chrome驱动管理 (可选)
+```
+
+### 运行程序
+
+```bash
 python main.py
 ```
 
-按提示选择：
-- `1` - 爬取新音乐并自动转换
-- `2` - 转换现有MP4文件
+![Run](https://img.shields.io/badge/Run-python%20main.py-green?style=flat-square&logo=python&logoColor=white)
 
-## 📁 当前项目结构
+## 🎯 使用指南
 
-```
-qishui-music-crawler/
-├── main.py                    # 主程序文件 (包含所有功能)
-├── requirements.txt           # 依赖清单
-├── README.md                  # 项目说明
-├── downloads/                 # 下载目录 (自动创建)
-│   ├── *.mp3                 # 转换后的音频文件
-│   └── *_info.json           # 音乐信息文件
-└── debug_page_fixed.html     # 调试文件 (自动生成)
-```
+### 基本使用
 
-## 🔍 技术原理解析
+1. **启动程序**
+   ```bash
+   python main.py
+   ```
 
-### 1. 工作流程
+2. **选择操作模式**
+   - `1` - 爬取新音乐并自动转换
+   - `2` - 只转换现有的MP4文件
 
-```mermaid
-graph LR
-    A[分享链接] --> B[重定向解析]
-    B --> C[Selenium访问]
-    C --> D[JavaScript执行]
-    D --> E[提取JSON数据]
-    E --> F[下载MP4]
-    F --> G[转换MP3]
-```
+3. **输入分享链接**（模式1）
+   ```
+   请输入汽水音乐分享链接: https://qishui.douyin.com/s/iaVudjjq/
+   ```
 
-### 2. 核心技术点
+### 支持的链接格式
 
-#### 🔗 链接重定向处理
+- `https://qishui.douyin.com/s/xxxxxx/` - 分享短链接
+- `https://music.douyin.com/xxxxx` - 直接页面链接
+
+### 输出文件
+
+下载的文件将保存在 `downloads/` 目录中：
+
+- `{艺术家} - {歌曲名}.mp4` - 原始音频文件
+- `{艺术家} - {歌曲名}.mp3` - 转换后的音频文件
+- `{艺术家} - {歌曲名}_info.json` - 歌曲信息文件
+
+## ⚙️ 配置选项
+
+### 主要配置 (`src/config.py`)
+
 ```python
-# 短链接: https://qishui.douyin.com/s/iaVudjjq/
-# 重定向到: https://music.douyin.com/qishui/share/track?track_id=xxx
-response = self.session.get(share_url, allow_redirects=True)
-real_url = response.url
+class Config:
+    # 下载设置
+    DOWNLOAD_DIR = "downloads"      # 下载目录
+    OUTPUT_FORMAT = "mp3"           # 输出格式
+    KEEP_ORIGINAL = False           # 是否保留原文件
+    AUTO_CONVERT = True             # 自动转换格式
+    
+    # 音频质量
+    BITRATE = "320k"                # 音频比特率
+    SAMPLE_RATE = 44100             # 采样率
+    CHANNELS = 2                    # 声道数
+    
+    # 浏览器设置
+    USE_SELENIUM = True             # 使用Selenium
+    HEADLESS = True                 # 无头模式
+    WINDOW_SIZE = "1920,1080"       # 窗口大小
 ```
 
-#### 🧠 JavaScript数据提取
+### 自定义配置
+
+您可以修改 `src/config.py` 中的配置来调整程序行为：
+
+- **下载目录**: 修改 `DOWNLOAD_DIR`
+- **音频格式**: 修改 `OUTPUT_FORMAT` (支持 mp3, wav, flac 等)
+- **音频质量**: 修改 `BITRATE` (如 "128k", "192k", "320k")
+- **浏览器模式**: 设置 `HEADLESS = False` 查看浏览器操作
+
+## 🔧 核心模块
+
+### 1. 爬虫模块 (`crawler.py`)
+
 ```python
-# 页面中的关键数据结构
-_ROUTER_DATA = {
-  "loaderData": {
-    "track_page": {
-      "audioWithLyricsOption": {
-        "trackName": "歌曲名",
-        "artistName": "艺术家", 
-        "url": "真实下载链接"
-      }
+from src.crawler import QiShuiMusicCrawler
+
+crawler = QiShuiMusicCrawler()
+success = crawler.crawl_and_download(share_url)
+crawler.close()
+```
+
+**功能：**
+- 处理分享链接重定向
+- 使用Selenium获取动态内容
+- 下载音频文件
+- 生成安全文件名
+
+### 2. 解析模块 (`parser.py`)
+
+```python
+from src.parser import PageParser
+
+parser = PageParser()
+track_info = parser.extract_track_info(html_content)
+```
+
+**功能：**
+- 多模式正则表达式匹配
+- 递归搜索音频信息
+- JSON数据解析
+
+### 3. 转换模块 (`converter.py`)
+
+```python
+from src.converter import AudioConverter
+
+converter = AudioConverter()
+output_file = converter.convert_audio(input_file)
+```
+
+**功能：**
+- MP4到MP3转换
+- 批量文件处理
+- 备用重命名方案
+
+### 4. 配置模块 (`config.py`)
+
+统一管理所有配置参数，包括：
+- 下载设置
+- 音频质量参数
+- 浏览器配置
+- 请求头设置
+
+## 🐛 常见问题
+
+### 1. Chrome驱动问题
+
+**错误**: `selenium.common.exceptions.WebDriverException`
+
+**解决方案**:
+```bash
+# 安装webdriver-manager (已在requirements.txt中)
+pip install webdriver-manager
+
+# 或手动下载Chrome驱动并添加到PATH
+```
+
+### 2. 音频转换失败
+
+**现象**: 显示 "使用备用方案：重命名文件"
+
+**解决方案**:
+```bash
+# 安装ffmpeg
+# Windows: 下载ffmpeg并添加到PATH
+# macOS: brew install ffmpeg
+# Ubuntu: sudo apt install ffmpeg
+```
+
+### 3. 页面解析失败
+
+**错误**: "未找到音频信息"
+
+**可能原因**:
+- 网页结构已更新
+- 网络连接问题
+- 反爬虫机制
+
+**解决方案**:
+- 检查网络连接
+- 更新User-Agent
+- 查看生成的debug文件
+
+### 4. 下载速度慢
+
+**优化方案**:
+- 检查网络连接
+- 修改 `TIMEOUT` 和 `DELAY_SECONDS` 配置
+- 使用代理（需自行配置）
+
+## 📝 开发说明
+
+### 添加新的解析模式
+
+在 `src/parser.py` 中添加新的正则表达式模式：
+
+```python
+self.patterns = [
+    r'现有模式1',
+    r'现有模式2',
+    r'新的模式',  # 添加新模式
+]
+```
+
+### 支持新的音频格式
+
+在 `src/converter.py` 中扩展转换功能：
+
+```python
+def convert_audio(self, input_file: str, output_format: str = "mp3"):
+    # 支持更多格式
+    if output_format in ["mp3", "wav", "flac", "aac"]:
+        # 转换逻辑
+```
+
+### 自定义请求头
+
+修改 `src/config.py` 中的 `get_headers()` 方法：
+
+```python
+@classmethod
+def get_headers(cls):
+    return {
+        'User-Agent': '自定义User-Agent',
+        # 其他请求头
     }
-  }
-}
 ```
-
-#### 🔄 音频格式转换
-```python
-# 使用MoviePy进行格式转换
-audio_clip = AudioFileClip(mp4_file)
-audio_clip.write_audiofile(mp3_file, bitrate="192k")
-```
-
-## ⚙️ 配置说明
-
-### 可修改参数
-
-在 `main.py` 中的 `QiShuiMusicCrawlerWithConverter` 类初始化时：
-
-```python
-crawler = QiShuiMusicCrawlerWithConverter(
-    use_selenium=True,      # 是否使用Selenium
-    auto_convert=True,      # 是否自动转换格式
-    output_format='mp3',    # 输出格式 (mp3/wav/aac)
-    keep_original=False     # 是否保留原MP4文件
-)
-```
-
-### 音质设置
-
-```python
-# 在convert_to_mp3方法中修改bitrate参数
-bitrate="192k"  # 可选: 128k, 192k, 256k, 320k
-```
-
-## 🛠️ 故障排除
-
-### 常见问题
-
-1. **ChromeDriver版本问题**
-   ```bash
-   # 解决方案：更新Chrome浏览器到最新版本
-   ```
-
-2. **moviepy导入错误**
-   ```bash
-   pip uninstall moviepy
-   pip install moviepy
-   ```
-
-3. **音频转换失败**
-   - 程序会自动使用备用方案（重命名）
-   - 虽然不是真正转换，但可以正常播放
-
-4. **下载失败**
-   - 检查网络连接
-   - 确认分享链接有效性
-   - 重新运行程序
-
-### 调试模式
-
-设置 `chrome_options.add_argument('--headless')` 为 `False` 可以看到浏览器操作过程。
-
-## 📋 使用示例
-
-### 示例1：下载单首歌曲
-
-```python
-# 修改main.py中的share_url
-share_url = "https://qishui.douyin.com/s/your_link_here/"
-```
-
-### 示例2：批量转换现有文件
-
-将多个MP4文件放入 `downloads` 目录，运行程序选择选项2。
-
-### 示例3：自定义下载目录
-
-修改 `download_dir` 参数：
-```python
-crawler.crawl_and_download(share_url, download_dir="my_music")
-```
-
-## 🔧 代码结构说明
-
-由于目前所有功能都在单个文件中，主要包含以下类和方法：
-
-### 核心类：`QiShuiMusicCrawlerWithConverter`
-
-| 方法名 | 功能描述 |
-|--------|----------|
-| `setup_selenium()` | 初始化Selenium WebDriver |
-| `get_page_content_with_selenium()` | 获取页面内容 |
-| `extract_track_info_from_page()` | 解析页面提取音乐信息 |
-| `find_audio_info_recursive()` | 递归查找音频数据 |
-| `download_audio()` | 下载音频文件 |
-| `convert_to_mp3()` | 转换音频格式 |
-| `crawl_and_download()` | 完整的爬取下载流程 |
-
-### 辅助函数
-
-| 函数名 | 功能描述 |
-|--------|----------|
-| `convert_existing_mp4_to_mp3()` | 转换现有MP4文件 |
-| `main()` | 主程序入口 |
-
-## 🚀 项目重构建议
-
-如果需要将项目模块化，建议的目录结构：
-
-```
-qishui-music-crawler/
-├── src/
-│   ├── __init__.py
-│   ├── crawler.py             # 爬虫核心逻辑
-│   ├── converter.py           # 音频转换功能
-│   ├── parser.py             # 页面解析功能
-│   └── config.py             # 配置管理
-├── examples/
-│   ├── basic_usage.py        # 基本使用示例
-│   └── batch_convert.py      # 批量转换示例
-├── tests/
-│   └── test_crawler.py       # 单元测试
-├── main.py                   # 主程序入口
-├── requirements.txt          # 依赖文件
-└── README.md                # 项目文档
-```
-
-## ⚠️ 重要声明
-
-### 法律声明
-- **仅供学习研究使用**
-- **请尊重音乐版权，不得用于商业用途**
-- **下载的音频仅供个人欣赏**
-- **建议支持正版音乐**
-
-### 技术限制
-- 音频链接可能有时效性
-- 网站可能更新反爬机制
-- 需要稳定的网络环境
-
-## 📊 性能数据
-
-| 项目 | 数值 |
-|------|------|
-| 平均下载速度 | 2-5MB/s |
-| 单首歌曲处理时间 | 30-60秒 |
-| 支持的音频格式 | MP4 → MP3 |
-| 音质选项 | 128k-320k |
-| 成功率 | >90% |
-
-## 🤝 贡献
-
-欢迎提交Issue和Pull Request来改进项目：
-
-1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
-
-## 📞 联系方式
-
-如有问题可以通过以下方式联系：
-
-- 发送邮件到: a1783190555@gmail.com
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
+
+本项目仅供学习和研究使用。请遵守相关网站的服务条款和版权法律。
+
+## 🤝 贡献
+
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
+![Issues](https://img.shields.io/badge/Issues-welcome-blue.svg?style=flat-square)
+
+欢迎提交Issues和Pull Requests来改进项目！
+
+## ⚠️ 免责声明
+
+![Educational Use](https://img.shields.io/badge/Educational-Use%20Only-red?style=flat-square)
+![No Commercial](https://img.shields.io/badge/Commercial%20Use-Prohibited-red?style=flat-square)
+
+- 本工具仅供个人学习和研究使用
+- 请尊重音乐版权，不要用于商业用途
+- 使用本工具下载的内容请遵守相关法律法规
+- 开发者不承担任何法律责任
 
 ---
 
-### 🌟 如果觉得有用，请给个Star支持！
+![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red?style=flat-square)
+![Python](https://img.shields.io/badge/Made%20with-Python-blue?style=flat-square&logo=python&logoColor=white)
 
-**使用提醒：请合理使用，尊重版权，支持正版音乐！**
+**注意**: 如果遇到任何问题，请先查看 `downloads/debug_page_fixed.html` 文件来诊断页面解析问题。
