@@ -256,7 +256,6 @@ qishui-music-crawler/
 
 如有问题可以通过以下方式联系：
 
-- 提交 [GitHub Issue](https://github.com/yourusername/qishui-music-crawler/issues)
 - 发送邮件到: a1783190555@gmail.com
 
 ## 📄 许可证
