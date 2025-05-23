@@ -1,0 +1,7 @@
+# 核心依赖
+requests>=2.25.0
+selenium>=4.0.0
+moviepy>=1.0.3
+
+# 可选依赖
+webdriver-manager>=3.8.0
