@@ -278,21 +278,13 @@ def get_headers(cls):
 
 ## 📄 许可证
 
-![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
-
 本项目仅供学习和研究使用。请遵守相关网站的服务条款和版权法律。
 
 ## 🤝 贡献
 
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
-![Issues](https://img.shields.io/badge/Issues-welcome-blue.svg?style=flat-square)
-
 欢迎提交Issues和Pull Requests来改进项目！
 
 ## ⚠️ 免责声明
-
-![Educational Use](https://img.shields.io/badge/Educational-Use%20Only-red?style=flat-square)
-![No Commercial](https://img.shields.io/badge/Commercial%20Use-Prohibited-red?style=flat-square)
 
 - 本工具仅供个人学习和研究使用
 - 请尊重音乐版权，不要用于商业用途
