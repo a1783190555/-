@@ -48,8 +48,6 @@ qishui-music-crawler/
 pip install -r requirements.txt
 ```
 
-![Install](https://img.shields.io/badge/Install-pip%20install%20-r%20requirements.txt-blue?style=flat-square&logo=pypi&logoColor=white)
-
 ### 依赖说明
 
 项目使用以下核心库：
